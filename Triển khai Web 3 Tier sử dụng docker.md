@@ -59,9 +59,9 @@ const port = 5000;
 
 const connection = mysql.createPool({
   host: process.env.DB_HOST || 'mysql-db',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'password',
-  database: process.env.DB_NAME || 'testdb'
+  user: process.env.DB_USER || 'quanluu',
+  password: process.env.DB_PASSWORD || 'akcyend9',
+  database: process.env.DB_NAME || 'luuducquan'
 });
 
 app.get('/', (req, res) => {
@@ -107,8 +107,9 @@ CMD ["node", "index.js"]
 <html>
 <head><title>My Docker 3-Tier App</title></head>
 <body>
-    <h1>Hello! This is Frontend served by Nginx inside Docker.</h1>
-    <p>Call /api/users to test connection to Backend.</p>
+    <h1>Hello Quan.</h1>
+    <p>Database Name: luuducquan</p>
+    <p>User:  quanluu</p>
 </body>
 </html>
 ```
@@ -165,13 +166,13 @@ services:
 
   mysql-db:
     image: mysql:8.0
-    container_name: my_mysql
+    container_name: mysql_quan
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: akcyend9
+      MYSQL_DATABASE: luuducquan
+      MYSQL_USER: quanluu
+      MYSQL_PASSWORD: akcyend9
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -183,9 +184,9 @@ services:
     restart: always
     environment:
       DB_HOST: mysql-db
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: testdb
+      DB_USER: quanluu
+      DB_PASSWORD: akcyend9
+      DB_NAME: luuducquan
     depends_on:
       - mysql-db
     networks:
@@ -203,7 +204,7 @@ services:
     container_name: my_proxy
     restart: always
     ports:
-      - "80:80"  # Mở port 80 ra ngoài internet
+      - "80:80"  
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
